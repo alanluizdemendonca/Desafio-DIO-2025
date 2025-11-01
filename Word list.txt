@@ -1,0 +1,41 @@
+wordlists/common-passwords.txt
+text
+123456
+password
+123456789
+qwerty
+abc123
+football
+letmein
+monkey
+dragon
+111111
+baseball
+iloveyou
+trustno1
+1234567
+sunshine
+master
+123123
+welcome
+shadow
+ashley
+wordlists/users.txt
+text
+admin
+administrator
+user
+guest
+test
+root
+info
+adm
+mysql
+user1
+oracle
+ftp
+Esses arquivos podem ser expandidos conforme necessário, mas já são úteis para testes básicos de ataques de força bruta.
+
+Com esses arquivos, o script bash para DVWA e os comandos Medusa indicados antes, você terá um projeto completo e funcional para enviar para a DIO.
+
+Esse material pode ser copiado diretamente para os arquivos correspondentes em seu repositório.
